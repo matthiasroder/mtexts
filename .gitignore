@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Sensitive files - mtexts specific
+config.json
+credentials.json
+token.json
+knowledge_base.md
