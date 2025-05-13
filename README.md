@@ -49,10 +49,11 @@ A tool for extracting content from Google Drive documents and creating a compreh
    c. Enable the Google Drive API
    d. Create OAuth 2.0 credentials (Desktop application)
    e. Download the credentials JSON file and save it as `credentials.json` in the project directory
+      (You can use `credentials.example.json` as a template)
 
 4. Configure your OpenAI API key:
    
-   a. Copy `config.json.example` to `config.json`
+   a. Copy `config.example.json` to `config.json`
    b. Add your OpenAI API key to the config file:
    ```
    {
@@ -151,6 +152,7 @@ This document discusses the implementation of feature X in project Y. It outline
 - Google API authentication uses OAuth for secure access
 - API keys are stored securely in configuration files
 - No data is sent to third parties except when using OpenAI for summarization
+- Sensitive files (`config.json`, `credentials.json`, `token.json`) are listed in `.gitignore` and should never be committed to version control
 
 ## License
 
