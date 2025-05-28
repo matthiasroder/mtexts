@@ -113,39 +113,6 @@ The generated knowledge base is a Markdown file with:
   - AI-generated summary and key concepts
   - Full text content
 
-Example document entry:
-
-```markdown
-## Document Title
-
-### Metadata
-
-```yaml
-title: Document Title
-type: application/vnd.google-apps.document
-created: 2023-01-01T12:00:00.000Z
-modified: 2023-01-15T15:30:00.000Z
-path: /My Documents/Projects/Document Title
-id: 1a2b3c4d5e6f7g8h9i0j
-url: https://docs.google.com/document/d/1a2b3c4d5e6f7g8h9i0j/edit
-```
-
-### Summary & Key Concepts
-
-This document discusses the implementation of feature X in project Y. It outlines the approach, technical requirements, and timeline for delivery.
-
-**Key Concepts:**
-
-- Feature X architecture
-- Integration with existing components
-- Performance considerations
-- Implementation timeline
-
-### Full Content
-
-[Full document text appears here]
-```
-
 ## Security and Privacy
 
 - Your documents remain private and are processed locally
