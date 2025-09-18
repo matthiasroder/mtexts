@@ -90,6 +90,7 @@ Available options:
 - `--token`: Path to Google API token file (default: `token.json`)
 - `--output`: Output file path for the knowledge base (default: `knowledge_base.md`)
 - `--folder-id`: Google Drive folder ID to process (default: root of Drive)
+- `--file-id`: Google Drive file ID to process (mutually exclusive with --folder-id)
 - `--config`: Path to configuration file (default: `config.json`)
 
 ### Example: Process a Specific Folder
@@ -101,6 +102,17 @@ Available options:
 2. Run the script with the folder ID:
    ```
    python main.py --folder-id 1a2b3c4d5e6f7g8h9i0j
+   ```
+
+### Example: Process a Single File
+
+1. Get the file ID from the URL of your Google Drive file:
+   - Example URL: `https://docs.google.com/document/d/1a2b3c4d5e6f7g8h9i0j/edit`
+   - File ID: `1a2b3c4d5e6f7g8h9i0j`
+
+2. Run the script with the file ID:
+   ```
+   python main.py --file-id 1a2b3c4d5e6f7g8h9i0j --output single_document.md
    ```
 
 ## Output Format

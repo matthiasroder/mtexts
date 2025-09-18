@@ -191,6 +191,40 @@ def download_file(drive_service, file_id):
         return None
 
 
+def get_single_file(drive_service, file_id):
+    """
+    Get metadata for a single file by ID.
+    
+    Args:
+        drive_service: Google Drive API service object
+        file_id: ID of the file to retrieve
+    
+    Returns:
+        List containing single file metadata dictionary (to match list_all_files interface)
+    """
+    try:
+        # Use same fields as list_all_files for consistency
+        fields = "id, name, mimeType, createdTime, modifiedTime, webViewLink, parents"
+        
+        file_info = drive_service.files().get(
+            fileId=file_id,
+            fields=fields
+        ).execute()
+        
+        # Add path information just like list_all_files does
+        try:
+            file_info['path'] = get_file_path(drive_service, file_info)
+        except Exception as e:
+            logger.warning(f"Could not get path for file {file_info['name']}: {e}")
+            file_info['path'] = "Unknown path"
+        
+        return [file_info]  # Return as list to match existing interface
+        
+    except Exception as e:
+        logger.error(f"Error getting file {file_id}: {str(e)}")
+        return []
+
+
 def export_google_doc(drive_service, file_id, mime_type='text/plain'):
     """
     Export a Google Doc/Sheet/Slide to the specified format.

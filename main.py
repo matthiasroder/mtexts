@@ -50,6 +50,11 @@ def parse_arguments():
         help="Google Drive folder ID to process (default: root of Drive)"
     )
     parser.add_argument(
+        "--file-id", 
+        type=str,
+        help="Google Drive file ID to process (mutually exclusive with --folder-id)"
+    )
+    parser.add_argument(
         "--config", 
         type=str, 
         default="config.json",
@@ -62,6 +67,10 @@ def main():
     """Main entry point for the script."""
     args = parse_arguments()
     
+    # Validate mutually exclusive arguments
+    if args.file_id and args.folder_id:
+        raise ValueError("--file-id and --folder-id are mutually exclusive. Use one or the other.")
+    
     # Load configuration
     config = load_config(args.config)
     
@@ -69,8 +78,16 @@ def main():
     drive_client = initialize_drive_client(args.credentials, args.token)
     
     # Get list of files
-    files = list_files(drive_client, args.folder_id)
-    logger.info(f"Found {len(files)} files to process")
+    if args.file_id:
+        files = get_single_file(drive_client, args.file_id)
+        if files:
+            logger.info(f"Processing single file: {files[0]['name']}")
+        else:
+            logger.error(f"File with ID {args.file_id} not found or inaccessible")
+            return
+    else:
+        files = list_files(drive_client, args.folder_id)
+        logger.info(f"Found {len(files)} files to process")
     
     # Process each file
     results = []
@@ -134,6 +151,13 @@ def list_files(drive_client, folder_id=None):
     # This function will be implemented in google_drive.py
     from google_drive import list_all_files
     return list_all_files(drive_client, folder_id)
+
+
+def get_single_file(drive_client, file_id):
+    """Get metadata for a single file by ID."""
+    # This function will be implemented in google_drive.py
+    from google_drive import get_single_file
+    return get_single_file(drive_client, file_id)
 
 
 def extract_content(drive_client, file_info):
